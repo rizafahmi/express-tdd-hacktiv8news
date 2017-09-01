@@ -1,0 +1,8 @@
+{
+  "name": "express-mongodb-hacktiv8news",
+  "version": "0.0.1",
+  "description": "Backend for hacktiv8 news",
+  "main": "server.js",
+  "author": "Riza Fahmi",
+  "license": "MIT"
+}
