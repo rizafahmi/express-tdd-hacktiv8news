@@ -16,4 +16,11 @@ describe('Listing news on /news', () => {
       expect(response.statusCode).toBe(200)
     })
   })
+  it('should response with JSON', () => {
+    return request(app).get('/news').then(response => {
+      expect(response.headers['content-type'].indexOf('json')).toBeGreaterThan(
+        0
+      )
+    })
+  })
 })
