@@ -6,6 +6,7 @@
   "author": "Riza Fahmi",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "supertest": "^3.0.0"
   }
 }
