@@ -4,5 +4,8 @@
   "description": "Backend for hacktiv8 news",
   "main": "server.js",
   "author": "Riza Fahmi",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
 }
