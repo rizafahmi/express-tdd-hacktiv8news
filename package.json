@@ -17,6 +17,11 @@
     "jest": "^20.0.4"
   },
   "standard": {
-    "globals": ["describe", "test", "it"]
+    "globals": [
+      "describe",
+      "test",
+      "it",
+      "expect"
+    ]
   }
 }
