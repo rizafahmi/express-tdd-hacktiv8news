@@ -5,8 +5,18 @@
   "main": "server.js",
   "author": "Riza Fahmi",
   "license": "MIT",
+  "scripts": {
+    "start": "node server",
+    "test": "jest --watch"
+  },
   "dependencies": {
     "express": "^4.15.4",
     "supertest": "^3.0.0"
+  },
+  "devDependencies": {
+    "jest": "^20.0.4"
+  },
+  "standard": {
+    "globals": ["describe", "test", "it"]
   }
 }
