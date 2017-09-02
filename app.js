@@ -1,9 +1,9 @@
 const app = require('express')()
 
-app.get('/', (req, res) => {
-  res.send('OK')
+app.get('/api/v1', (req, res) => {
+  res.json({ status: 'OK' })
 })
-app.get('/news', (req, res) => {
+app.get('/api/v1/news', (req, res) => {
   res.json([
     {
       title: 'Hacktiv8',
