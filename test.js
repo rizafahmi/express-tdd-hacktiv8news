@@ -18,8 +18,8 @@ describe('Listing news on /news', () => {
   })
   it('should response with JSON', () => {
     return request(app).get('/news').then(response => {
-      expect(response.headers['content-type'].indexOf('json')).toBeGreaterThan(
-        0
+      expect(response.headers['content-type']).toEqual(
+        expect.stringMatching(/json/)
       )
     })
   })

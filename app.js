@@ -4,7 +4,7 @@ app.get('/', (req, res) => {
   res.send('OK')
 })
 app.get('/news', (req, res) => {
-  res.json({ status: 'OK' })
+  res.json('OK')
 })
 
 module.exports = app
