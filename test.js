@@ -2,7 +2,7 @@ const request = require('supertest')
 const app = require('./app')
 
 describe('Initial test', () => {
-  it('It should return 200', done => {
+  test('It should return 200', done => {
     request(app).get('/').expect(200).end(error => {
       if (error) throw error
       done()
@@ -11,15 +11,27 @@ describe('Initial test', () => {
 })
 
 describe('Listing news on /news', () => {
-  it('Returns 200 status code', () => {
+  test('Returns 200 status code', () => {
     return request(app).get('/news').then(response => {
       expect(response.statusCode).toBe(200)
     })
   })
-  it('should response with JSON', () => {
+  test('should response with JSON', () => {
     return request(app).get('/news').then(response => {
       expect(response.headers['content-type']).toEqual(
         expect.stringMatching(/json/)
+      )
+    })
+  })
+  test('Initial state of news', () => {
+    return request(app).get('/news').then(response => {
+      expect(response.text).toEqual(
+        JSON.stringify([
+          {
+            title: 'Hacktiv8',
+            description: 'The best ever coding bootcamp'
+          }
+        ])
       )
     })
   })
