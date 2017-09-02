@@ -45,3 +45,14 @@ describe('Listing news on /news', () => {
     })
   })
 })
+
+describe('Create new news', () => {
+  test('Returns 201 status code', () => {
+    return request(app)
+      .post(`${defaultPath}news`)
+      .send('title=new+news&description=a+brand+new+news')
+      .then(response => {
+        expect(response.statusCode).toEqual(201)
+      })
+  })
+})
