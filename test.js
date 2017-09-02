@@ -55,4 +55,15 @@ describe('Create new news', () => {
         expect(response.statusCode).toEqual(201)
       })
   })
+  it('Returns a news object', () => {
+    return request(app)
+      .post(`${defaultPath}news`)
+      .send('title=new+news&description=a+brand+new+news')
+      .then(response => {
+        expect(response.body).toEqual({
+          title: 'new news',
+          description: 'a brand new news'
+        })
+      })
+  })
 })
