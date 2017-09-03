@@ -1,17 +1,10 @@
 const request = require('supertest')
+const models = require('./models')
 const app = require('./app')
+const r = models.thinky.r
+const News = require('./models/news').News
 
 const defaultPath = '/api/v1/'
-const news = [
-  {
-    title: 'Hacktiv8',
-    description: 'The best ever coding bootcamp'
-  },
-  {
-    title: 'New News',
-    description: 'A brand new news.'
-  }
-]
 
 describe('Initial test', () => {
   it('should return 200', done => {
@@ -29,7 +22,18 @@ describe('Initial test', () => {
   })
 })
 
+const newsData = { title: 'New News', description: 'A brand new news' }
+
 describe('Listing news on /news', () => {
+  beforeEach(() => {
+    const news = new News(newsData)
+    news
+      .save()
+      .then(result => {
+        console.log('Seeding...')
+      })
+      .error(err => console.log(err))
+  })
   it('Returns 200 status code', () => {
     return request(app).get(`${defaultPath}news`).then(response => {
       expect(response.statusCode).toBe(200)
@@ -44,7 +48,10 @@ describe('Listing news on /news', () => {
   })
   it('Initial state of news', () => {
     return request(app).get(`${defaultPath}news`).then(response => {
-      expect(response.text).toEqual(JSON.stringify(news))
+      models.getAllNews().then(news => {
+        console.log(news)
+        expect(response.text).toEqual(JSON.stringify(news))
+      })
     })
   })
 })

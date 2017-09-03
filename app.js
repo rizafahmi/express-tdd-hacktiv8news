@@ -1,5 +1,10 @@
+'use strict'
+
 const bodyParser = require('body-parser')
 const app = require('express')()
+
+// Models
+const models = require('./models')
 
 const urlEncodedMiddleware = bodyParser.urlencoded({ extended: false })
 
@@ -19,7 +24,9 @@ app.get('/api/v1', (req, res) => {
 })
 
 app.get('/api/v1/news', (req, res) => {
-  res.json(news)
+  models.getAllNews().then(news => {
+    res.json(news)
+  })
 })
 
 app.post('/api/v1/news', urlEncodedMiddleware, (req, res) => {

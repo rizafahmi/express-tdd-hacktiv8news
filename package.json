@@ -7,12 +7,13 @@
   "license": "MIT",
   "scripts": {
     "start": "node server",
-    "test": "jest --watch"
+    "test": "NODE_ENV=test jest --watch"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "thinky": "^2.3.8"
   },
   "devDependencies": {
     "jest": "^20.0.4"
@@ -22,7 +23,9 @@
       "describe",
       "test",
       "it",
-      "expect"
+      "expect",
+      "beforeEach",
+      "afterEach"
     ]
   }
 }
