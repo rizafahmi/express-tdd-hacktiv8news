@@ -73,10 +73,9 @@ describe('Create new news', () => {
       .post(`${defaultPath}news`)
       .send('title=Yet+Another+New+News&description=Yet+another+new+news')
       .then(response => {
-        expect(response.body).toEqual({
-          title: 'Yet Another New News',
-          description: 'Yet another new news'
-        })
+        const data = response.body
+        expect(data.title).toEqual('Yet Another New News')
+        expect(data.description).toEqual('Yet another new news')
       })
   })
 })

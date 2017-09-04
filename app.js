@@ -10,7 +10,7 @@ app.get('/api/v1', (req, res) => {
 
 app.get('/api/v1/news', (req, res, next) => {
   news
-    .getAll()
+    .findAll()
     .then(news => {
       res.json(news)
     })
@@ -19,8 +19,16 @@ app.get('/api/v1/news', (req, res, next) => {
     })
 })
 
-app.post('/api/v1/news', urlEncodedMiddleware, (req, res) => {
-  res.status(201).json(req.body)
+app.post('/api/v1/news', urlEncodedMiddleware, (req, res, next) => {
+  news
+    .add(req.body)
+    .then(id => {
+      return news.find(id)
+    })
+    .then(news => {
+      res.status(201).json(news)
+    })
+    .catch(err => next(err))
 })
 
 module.exports = app

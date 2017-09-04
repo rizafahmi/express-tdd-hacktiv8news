@@ -6,10 +6,20 @@ const News = () => {
   return knex('news')
 }
 
-const getAll = () => {
+const findAll = () => {
   return News().select()
 }
 
+const find = id => {
+  return News().where('id', parseInt(id)).first()
+}
+
+const add = show => {
+  return News().insert(show, 'id')
+}
+
 module.exports = {
-  getAll
+  findAll,
+  find,
+  add
 }
