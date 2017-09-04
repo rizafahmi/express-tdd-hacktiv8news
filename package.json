@@ -12,8 +12,9 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
-    "supertest": "^3.0.0",
-    "thinky": "^2.3.8"
+    "knex": "^0.13.0",
+    "pg": "^7.3.0",
+    "supertest": "^3.0.0"
   },
   "devDependencies": {
     "jest": "^20.0.4"
@@ -25,7 +26,9 @@
       "it",
       "expect",
       "beforeEach",
-      "afterEach"
+      "afterEach",
+      "beforeAll",
+      "afterAll"
     ]
   }
 }

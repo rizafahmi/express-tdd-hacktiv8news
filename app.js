@@ -1,6 +1,7 @@
 'use strict'
 
 const bodyParser = require('body-parser')
+const news = require('./models')
 const app = require('express')()
 
 // Models
@@ -8,29 +9,31 @@ const models = require('./models')
 
 const urlEncodedMiddleware = bodyParser.urlencoded({ extended: false })
 
-const news = [
-  {
-    title: 'Hacktiv8',
-    description: 'The best ever coding bootcamp'
-  },
-  {
-    title: 'New News',
-    description: 'A brand new news.'
-  }
-]
-
 app.get('/api/v1', (req, res) => {
   res.json({ status: 'OK' })
 })
 
-app.get('/api/v1/news', (req, res) => {
-  models.getAllNews().then(news => {
-    res.json(news)
-  })
+app.get('/api/v1/news', (req, res, next) => {
+  news
+    .findAll()
+    .then(news => {
+      res.json(news)
+    })
+    .catch(err => {
+      next(err)
+    })
 })
 
-app.post('/api/v1/news', urlEncodedMiddleware, (req, res) => {
-  res.status(201).json(req.body)
+app.post('/api/v1/news', urlEncodedMiddleware, (req, res, next) => {
+  news
+    .add(req.body)
+    .then(id => {
+      return news.find(id)
+    })
+    .then(news => {
+      res.status(201).json(news)
+    })
+    .catch(err => next(err))
 })
 
 module.exports = app
