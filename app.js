@@ -1,25 +1,22 @@
 const bodyParser = require('body-parser')
+const news = require('./models')
 const app = require('express')()
 
 const urlEncodedMiddleware = bodyParser.urlencoded({ extended: false })
-
-const news = [
-  {
-    title: 'Hacktiv8',
-    description: 'The best ever coding bootcamp'
-  },
-  {
-    title: 'New News',
-    description: 'A brand new news.'
-  }
-]
 
 app.get('/api/v1', (req, res) => {
   res.json({ status: 'OK' })
 })
 
-app.get('/api/v1/news', (req, res) => {
-  res.json(news)
+app.get('/api/v1/news', (req, res, next) => {
+  news
+    .getAll()
+    .then(news => {
+      res.json(news)
+    })
+    .catch(err => {
+      next(err)
+    })
 })
 
 app.post('/api/v1/news', urlEncodedMiddleware, (req, res) => {

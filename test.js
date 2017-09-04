@@ -1,17 +1,24 @@
+process.env.NODE_ENV = 'test'
 const request = require('supertest')
 const app = require('./app')
+const config = require('./knexfile.js')['test']
+const knex = require('knex')(config)
 
 const defaultPath = '/api/v1/'
-const news = [
-  {
-    title: 'Hacktiv8',
-    description: 'The best ever coding bootcamp'
-  },
-  {
-    title: 'New News',
-    description: 'A brand new news.'
-  }
-]
+
+beforeAll(() => {
+  return knex.migrate
+    .rollback()
+    .then(() => {
+      return knex.migrate.latest()
+    })
+    .then(() => {
+      return knex.seed.run()
+    })
+})
+afterAll(() => {
+  return knex.migrate.rollback()
+})
 
 describe('Initial test', () => {
   it('should return 200', done => {
@@ -44,7 +51,10 @@ describe('Listing news on /news', () => {
   })
   it('Initial state of news', () => {
     return request(app).get(`${defaultPath}news`).then(response => {
-      expect(response.text).toEqual(JSON.stringify(news))
+      const responseObj = JSON.parse(response.text)
+      expect(responseObj.length).toEqual(2)
+      expect(responseObj[0].title).toEqual('A Brand New News')
+      expect(responseObj[1].title).toEqual('Yet Another News')
     })
   })
 })
