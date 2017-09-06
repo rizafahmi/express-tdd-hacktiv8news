@@ -95,4 +95,13 @@ describe('News detail', () => {
       expect(response.status).toBe(200)
     })
   })
+  it('Returns detail news data', () => {
+    return request(app).get(`${defaultPath}news/2`).then(response => {
+      const seedData = {
+        title: 'Yet Another News',
+        description: 'And this is not a new news, just yet another news.'
+      }
+      expect(response.body.title).toEqual(seedData.title)
+    })
+  })
 })
