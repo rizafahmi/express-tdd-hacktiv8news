@@ -47,4 +47,10 @@ app.delete('/api/v1/news/:id', (req, res, next) => {
     })
 })
 
+app.get('/api/v1/news/:id', (req, res) => {
+  news.find(req.params.id).then(news => {
+    res.json(news)
+  })
+})
+
 module.exports = app
