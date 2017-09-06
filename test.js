@@ -88,3 +88,11 @@ describe('Deleting a news', () => {
     })
   })
 })
+
+describe('News detail', () => {
+  test('Return 200 status', () => {
+    return request(app).get(`${defaultPath}news/1`).then(response => {
+      expect(response.status).toBe(200)
+    })
+  })
+})
