@@ -36,4 +36,15 @@ app.post('/api/v1/news', urlEncodedMiddleware, (req, res, next) => {
     .catch(err => next(err))
 })
 
+app.delete('/api/v1/news/:id', (req, res, next) => {
+  news
+    .remove(req.params.id)
+    .then(data => {
+      res.sendStatus(204)
+    })
+    .catch(err => {
+      console.error(err)
+    })
+})
+
 module.exports = app

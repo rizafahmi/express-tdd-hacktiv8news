@@ -83,8 +83,8 @@ describe('Create new news', () => {
 
 describe('Deleting a news', () => {
   test('Returns 204', () => {
-    return request(app).delete('/news/1').then(response => {
-      expect(response.statusCode).toBe(204)
+    return request(app).delete(`${defaultPath}news/1`).then(response => {
+      expect(response.status).toBe(204)
     })
   })
 })

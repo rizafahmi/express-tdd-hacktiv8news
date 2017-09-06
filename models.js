@@ -14,12 +14,17 @@ const find = id => {
   return News().where('id', parseInt(id)).first()
 }
 
-const add = show => {
-  return News().insert(show, 'id')
+const add = news => {
+  return News().insert(news, 'id')
+}
+
+const remove = id => {
+  return News().where('id', parseInt(id)).del()
 }
 
 module.exports = {
   findAll,
   find,
-  add
+  add,
+  remove
 }
